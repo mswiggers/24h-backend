@@ -1,0 +1,1 @@
+default_app_config = 'vtk24u.competition.apps.CompetitionConfig'

@@ -1,0 +1,83 @@
+{% extends 'competition/base.html' %}
+{% block title %}Sign Up{% endblock title%}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="alert alert-warning" role="alert">
+      A simple warning alert—check it out!
+    </div>
+    <div class="alert alert-danger" role="alert">
+      A simple danger alert—check it out!
+    </div>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'competition:signup' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="identification">University identification or name</label>
+        <input type="text" name="user_identification" class="form-control" id="identification" autocomplete="off" placeholder="University number or full name">
+      </div>
+
+      <div class="form-group form-row extra-info">
+        <div class="col">
+          <label for="first_name">First name</label>
+          <input type="text" name="first_name" class="form-control" id="first_name" autocomplete="off" placeholder="First name" required>
+        </div>
+
+        <div class="col">
+          <label for="last_name">Last name</label>
+          <input type="text" name="first_name" class="form-control" id="last_name" autocomplete="off" placeholder="Last name" required>
+        </div>
+      </div>
+
+      <div class="form-group extra-info">
+        <label for="department">Department</label>
+        <select class="form-control" id="department">
+          <option>Elektrotechniek (ESAT)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Sign up!</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h2>
+      Current queue
+      <small class="text-muted">21 people in queue</small>
+    </h2>
+    <table class="table">
+      <thead>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Predicted start time</th>
+      </thead>
+      <tbody>
+        <tr class="table-active">
+          <th scope="row">-</th>
+          <td>Belian Callaerts</td>
+          <td>-</td>
+        </tr>
+        <tr class="table-active">
+          <th scope="row">-</th>
+          <td>Pieter Maene</td>
+          <td>-</td>
+        </tr>
+        <tr class="table-primary">
+          <th scope="row">1</th>
+          <td>Matthias Swiggers</td>
+          <td>Busy</td>
+        </tr>
+        <tr class="table-light">
+          <th scope="row">2</th>
+          <td>Jaspreet Singh Hardeep</td>
+          <td>22:01</td>
+        </tr>
+        <tr class="table-light">
+          <th scope="row">3</th>
+          <td>Mathias Born</td>
+          <td>22:03</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>    
+{% endblock content %}
