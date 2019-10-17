@@ -27,7 +27,7 @@ class LapSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
   class Meta:
     model = Group
-    fields = ['name', 'happy_hours']
+    fields = '__all__'
 
   def to_representation(self, instance):
     self.fields['happy_hours'] = HappyHourSerializer(many=True, read_only=True)

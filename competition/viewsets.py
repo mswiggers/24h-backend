@@ -44,7 +44,7 @@ class LapViewSet(viewsets.ModelViewSet):
   @action(detail=False, methods=['post'])
   def reverse(self, request):
     try:
-      current_lap = Lap.objects.exclude(start_time__isnull=False).exclude(duration__isnull=True).get()
+      current_lap = Lap.objects.get(start_time__isnull=False, duration__isnull=True)
       current_lap.start_time = None
       current_lap.save()
     except MultipleObjectsReturned as e:
