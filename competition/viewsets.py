@@ -1,18 +1,19 @@
 from rest_framework import viewsets, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Runner, Lap, Group, HappyHour, University
-from .serializers import RunnerSerializer, LapSerializer, GroupSerializer, HappyHourSerializer, UniversitySerializer
+from .models import Runner, Lap, Group, HappyHour, University, GroupScore
+from .serializers import RunnerSerializer, LapSerializer, GroupSerializer, HappyHourSerializer, UniversitySerializer, GroupScoreSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 import datetime
 
 class RunnerViewSet(viewsets.ModelViewSet):
-  queryset = Runner.objects.all()
   serializer_class = RunnerSerializer
-  filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-  ordering_fields = ['first_name', 'last_name', 'identification']
-  filterset_fields = ['first_name', 'last_name', 'identification']
+
+  def get_queryset(self):
+    keyword = self.request.query_params.get('identification', '')
+    queryset = Runner.objects.filter(identification__iexact=keyword)
+    return queryset
 
 class LapViewSet(viewsets.ModelViewSet):
   queryset = Lap.objects.all()
@@ -71,10 +72,10 @@ class HappyHourViewSet(viewsets.ModelViewSet):
   queryset = HappyHour.objects.all()
   serializer_class = HappyHourSerializer
 
-# class DepartmentViewSet(viewsets.ModelViewSet):
-#   queryset = Department.objects.all()
-#   serializer_class = DepartmentSerializer
-
 class UniversityViewSet(viewsets.ModelViewSet):
   queryset = University.objects.all()
   serializer_class = UniversitySerializer
+
+class GroupScoreViewSet(viewsets.ModelViewSet):
+  queryset = GroupScore.objects.all()
+  serializer_class = GroupScoreSerializer

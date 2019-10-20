@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'channels',
-    'django_eventstream'
+    'django_eventstream',
+    'annoying'
 ]
 
 MIDDLEWARE = [

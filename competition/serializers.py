@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Runner, Lap, Group, HappyHour, University
+from .models import Runner, Lap, Group, HappyHour, University, GroupScore
 
 class UniversitySerializer(serializers.ModelSerializer):
   class Meta:
@@ -38,7 +38,7 @@ class HappyHourSerializer(serializers.ModelSerializer):
     model = HappyHour
     fields = '__all__'
 
-# class DepartmentSerializer(serializers.ModelSerializer):
-#   class Meta:
-#     model = Department
-#     fields = '__all__'
+class GroupScoreSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = GroupScore
+    fields = '__all__'
