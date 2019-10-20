@@ -81,7 +81,12 @@ class GroupScore(models.Model):
     members = Runner.objects.filter(group=self.group)
     laps = Lap.objects.filter(runner__in=members)
     for lap in laps:
-      lap_points = Criterium.objects.filter(upper_limit__gte=lap.duration).order_by('upper_limit').first().score
+      criterium = Criterium.objects.filter(upper_limit__gte=lap.duration).order_by('upper_limit').first()
+      
+      if not criterium:
+        continue
+
+      lap_points = criterium.score
 
       for happy_hour in self.group.happy_hours.all():
         start_time_local = lap.start_time.astimezone(tz=local_tz).time()
