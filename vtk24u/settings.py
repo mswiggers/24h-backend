@@ -78,8 +78,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vtk24u.wsgi.application'
 ASGI_APPLICATION = 'vtk24u.routing.application'
-EVENTSTREAM_ALLOW_ORIGIN = 'http://localhost:8080'
-
+EVENTSTREAM_ALLOW_ORIGIN = 'http://172.24.124.238:8080'
+EVENTSTREAM_ALLOW_CREDENTIALS = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -91,8 +91,10 @@ DATABASES = {
     }
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ('http://172.24.124.238:8080')
+CORS_EXPOSE_HEADERS = '*'
+CORS_ALLOW_CREDENTIALS = True
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

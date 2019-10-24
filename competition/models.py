@@ -81,6 +81,8 @@ class GroupScore(models.Model):
     members = Runner.objects.filter(group=self.group)
     laps = Lap.objects.filter(runner__in=members)
     for lap in laps:
+      if not lap.duration:
+        continue
       criterium = Criterium.objects.filter(upper_limit__gte=lap.duration).order_by('upper_limit').first()
       
       if not criterium:
